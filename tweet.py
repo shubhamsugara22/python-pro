@@ -16,10 +16,10 @@ class TwitterClient(object):
         Generic twitter for sentiment analysis
 
         '''
-        consumer_key = 'BCR9If8x5kRoloTYqSOHyXBuv'
-        consumer_secret = 'muW3A2HdSRN8hMDBILsiE3371cbn5s8X0tYtESnLtqKT3KPsYA'
-        access_token = '940155094414135298-fyGuEHtDoxblwdef6RAeYljiqgiLD2a'
-        access_token_secret = '860IrMeAY7IMt1t5wLO4oVafmGWhgFgRnxlZKg2Trlfhk'
+        consumer_key = '#####################'
+        consumer_secret = '###################################'
+        access_token = '######################################'
+        access_token_secret = '#####################################3'
 
         try:
 
@@ -104,5 +104,6 @@ def main():
     for tweet in ntweets[:10]:
         print(tweet["text"])
 
-    if __name__ == "__main__":
-        main()
+
+if __name__ == "__main__":
+    main()
