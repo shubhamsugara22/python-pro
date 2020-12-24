@@ -39,18 +39,18 @@ class TwitterClient(object):
         analysis = TextBlob(self.clean_tweet(tweet))
 
         if analysis.sentiment.polarity > 0:
-            return "Positive"
+            return "positive"
         elif analysis.sentiment.polarity == 0:
-            return "Neutral"
+            return "neutral"
         else:
-            return "Negative"
+            return "negative"
 
     def get_tweets(self, query, count=10):
 
         tweets = []
 
         try:
-
+            # call twitter APi to fetch tweets
             fetched_tweets = self.api.search(q=query, count=count)
 
             for tweet in fetched_tweets:
@@ -67,8 +67,8 @@ class TwitterClient(object):
                     if parsed_tweet not in tweets:
 
                         tweets.append(parsed_tweet)
-                    else:
-                        tweets.append(parsed_tweet)
+                else:
+                    tweets.append(parsed_tweet)
 
             return tweets
 
@@ -78,9 +78,10 @@ class TwitterClient(object):
 
 
 def main():
-
+    # creating object of TWitterClient Class
     api = TwitterClient()
 
+# calling function to get tweets
     tweets = api.get_tweets(query="Donald trump ", count=200)
 
     ptweets = [tweet for tweet in tweets if tweet["sentiment"] == 'positive']
