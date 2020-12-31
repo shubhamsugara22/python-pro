@@ -18,9 +18,11 @@ from tkinter import filedialog
 
 from tkinter import *
 
+import PIL
+
 from PIL import ImageTk, Image
 
-top = tk.Tk
+top = tk.Tk()
 top.geometry('400x400')
 top.title('Cartoonify your image!')
 top.configure(background='white')
@@ -84,18 +86,33 @@ def cartoonify(ImagePath):
                              'xticks': [], 'yticks': []}, gridspec_kw=dict(hspace=0.1, wspace=0.1))
 
     for i, ax in enumerate(axes.flat):
-        ax.imshow(images[i], cmap=gray)
+        ax.imshow(images[i], cmap='gray')
+
+    save1 = Button(top, text="Save cartoon image",
+                   command=lambda: save(Resized6, ImagePath), padx=30, pady=5)
+    save1.configure(background='#364156', foreground='white',
+                    font=('calibri', 10, 'bold'))
+    save1.pack(side=TOP, pady=50)
 
     plt.show()
 
 
 def save(Resized6, ImagePath):
-
     new_name = "cartoonified_Image"
     path1 = os.path.dirname(ImagePath)
     extensions = os.path.splitext(ImagePath)[1]
     path = os.path.join(path1, new_name+extensions)
-    cv2.imwrite(path, cv2.cvtColor(Resized6, cv2, COLOR_RGB2BGR))
+    cv2.imwrite(path, cv2.cvtColor(Resized6, cv2.COLOR_RGB2BGR))
     I = "Image saved by name " + new_name + " at " + path
 
     tk.messagebox.showinfo(title=None, message=I)
+
+
+upload = Button(top, text="Cartoonify an Image",
+                command=upload, padx=10, pady=5)
+upload.configure(background='#364156', foreground='white',
+                 font=('calibri', 10, 'bold'))
+upload.pack(side=TOP, pady=50)
+
+
+top.mainloop()
