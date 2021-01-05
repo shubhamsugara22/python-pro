@@ -4,26 +4,18 @@ from keras.models import Sequential
 import random
 import numpy as np
 import nltk
-
 import json
-
 import pickle
-
 from nltk.stem import WordNetLemmatizer
-
 lemmatizer = WordNetLemmatizer()
 
 words = []
-
 classes = []
-
 documents = []
-
 ignore_words = ['?', '!']
-
 data_file = open('intents.json').read()
 
-intents = json.load(data_file)
+intents = json.loads(data_file)
 
 for intent in intents['intents']:
     for pattern in intent['patterns']:
