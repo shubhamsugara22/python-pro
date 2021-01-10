@@ -90,4 +90,18 @@ total_validate = validate_df.shape[0]
 
 batch_size = 15
 
-train_datagen =
+train_datagen = ImageDataGenerator(rotation_range=15, rescale=1./255, shear_range=0.1,
+                                   zoom_range=0.2, horizontal_flip=True, width_shift_range=0.1, height_shift_range=0.1)
+
+train_generator = train_datagen.flow_from_dataframe(
+    train_df, "//train/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
+
+validation_datagen = ImageDataGenerator(rescale=1./255)
+validation_generator = validation_datagen.flow_from_dataframe(
+    validate_df, "//train/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
+
+test_datagen = ImageDataGenerator(rotation_range=15, rescale=1./255, shear_range=0.1,
+                                  zoom_range=0.2, horizontal_flip=True, width_shift_range=0.1, height_shift_range=0.1)
+
+test_generator = test_datagen.flow_from_dataframe(
+    train_df, "//test/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
