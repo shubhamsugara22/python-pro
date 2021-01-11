@@ -1,3 +1,5 @@
+import numpy as np
+from PIL import image
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation, BatchNormalization
 from keras.models import Sequential
@@ -135,6 +137,30 @@ test_df['category'] = test_df['category'].replace(label_map)
 
 test_df['category'] = test_df['category'].replace({'dog': 1, 'cat': 0})
 
-sample_test =
+sample_test = test_df.head()
 sample_test.head()
-plt.figure()
+plt.figure(figsize=(12, 24))
+for index, row in sample_test.iterrows():
+    filename = row['filename']
+    category = row['category']
+    img = load_img()
+    plt.subplot(6, 3 index+1)
+    plt.imshow(img)
+    plt.xlabel(filename + '(' + "{}".format(category) + ')')
+plt.tight_layout()
+plt.show()
+
+
+result = {
+    0: 'cat',
+    1: 'dog'
+}
+
+im = image.open("__image_path_TO_custom_image")
+im = im.resize(Image_Size)
+im = np.expand_dims(im, axis=0)
+im = np.array(im)
+im = im/255
+
+pred = model.predict_classes([im])[0]
+print(pred, results[pred])
