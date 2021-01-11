@@ -23,7 +23,7 @@ Image_Size = (Image_Width, Image_Height)
 Image_Channels = 3
 
 # preparing data set for model
-filenames = os.listdir("/train")
+filenames = os.listdir("/train")  # enter directory location
 
 categories = []
 
@@ -92,7 +92,7 @@ batch_size = 15
 
 train_datagen = ImageDataGenerator(rotation_range=15, rescale=1./255, shear_range=0.1,
                                    zoom_range=0.2, horizontal_flip=True, width_shift_range=0.1, height_shift_range=0.1)
-
+# enter directory location
 train_generator = train_datagen.flow_from_dataframe(
     train_df, "//train/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
 
@@ -105,3 +105,36 @@ test_datagen = ImageDataGenerator(rotation_range=15, rescale=1./255, shear_range
 
 test_generator = test_datagen.flow_from_dataframe(
     train_df, "//test/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
+
+epochs = 10
+history = model.fit_generator(
+    train_generator,
+    epochs=epochs,
+    validation_data=validation_generator,
+    validation_steps=total_validate/batch_size,
+    steps_per_epoch=total_train/batch_size,
+    callbacks=callbacks,
+)
+model.save("model1_catVSdogs_10epoch.h5")
+
+test_filename = os.listdir(".//test1")  # enter dir location
+
+test_df = pd.DataFrame({
+    'filename': test_filenames,
+})
+nb_samples = test_df.shape[0]
+
+predict = model.predict_generator(
+    test_generator, steps=np.ceil(nb_samples/batch_size))
+
+test_df['category'] = np.argmax(predict, axis=-1)
+label_map = dict((v, k) for k, v in train_generator.class_indices.items())
+
+test_df['category'] = test_df['category'].replace(label_map)
+
+
+test_df['category'] = test_df['category'].replace({'dog': 1, 'cat': 0})
+
+sample_test =
+sample_test.head()
+plt.figure()
