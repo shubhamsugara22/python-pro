@@ -1,5 +1,6 @@
 import numpy as np
-from PIL import image
+import PIL
+from PIL import Image
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation, BatchNormalization
 from keras.models import Sequential
@@ -25,7 +26,9 @@ Image_Size = (Image_Width, Image_Height)
 Image_Channels = 3
 
 # preparing data set for model
-filenames = os.listdir("/train")  # enter directory location
+# enter directory location
+filenames = os.listdir(
+    r'C:\Users\hp\OneDrive\Desktop\python pro\catvdog\train\train')
 
 categories = []
 
@@ -96,17 +99,17 @@ train_datagen = ImageDataGenerator(rotation_range=15, rescale=1./255, shear_rang
                                    zoom_range=0.2, horizontal_flip=True, width_shift_range=0.1, height_shift_range=0.1)
 # enter directory location
 train_generator = train_datagen.flow_from_dataframe(
-    train_df, "//train/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
+    train_df, r'C:\Users\hp\OneDrive\Desktop\python pro\catvdog\train\train', x_col='filename', y_col='category', target_size=Image_Size, class_mode='categorical', batch_size=batch_size)
 
 validation_datagen = ImageDataGenerator(rescale=1./255)
 validation_generator = validation_datagen.flow_from_dataframe(
-    validate_df, "//train/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
+    validate_df, r'C:\Users\hp\OneDrive\Desktop\python pro\catvdog\train\train', x_col='filename', y_col='category', target_size=Image_Size, class_mode='categorical', batch_size=batch_size)
 
 test_datagen = ImageDataGenerator(rotation_range=15, rescale=1./255, shear_range=0.1,
                                   zoom_range=0.2, horizontal_flip=True, width_shift_range=0.1, height_shift_range=0.1)
 
 test_generator = test_datagen.flow_from_dataframe(
-    train_df, "//test/", x_col='filename', y_col='category', target_size=Image_size, class_mode='categorical', batch_size=batch_size)
+    train_df, r'C:\Users\hp\OneDrive\Desktop\python pro\catvdog\test1\test1', x_col='filename', y_col='category', target_size=Image_Size, class_mode='categorical', batch_size=batch_size)
 
 epochs = 10
 history = model.fit_generator(
@@ -119,10 +122,11 @@ history = model.fit_generator(
 )
 model.save("model1_catVSdogs_10epoch.h5")
 
-test_filename = os.listdir(".//test1")  # enter dir location
+test_filename = os.listdir(
+    r'C:\Users\hp\OneDrive\Desktop\python pro\catvdog\test1\test1')  # enter dir location
 
 test_df = pd.DataFrame({
-    'filename': test_filenames,
+    'filename': test_filename,
 })
 nb_samples = test_df.shape[0]
 
@@ -143,8 +147,9 @@ plt.figure(figsize=(12, 24))
 for index, row in sample_test.iterrows():
     filename = row['filename']
     category = row['category']
-    img = load_img()
-    plt.subplot(6, 3 index+1)
+    img = load_img(r'C:\Users\hp\OneDrive\Desktop\python pro\catvdog\test1\test1' +
+                   filename, target_size=Image_size)
+    plt.subplot(6, 3, index+1)
     plt.imshow(img)
     plt.xlabel(filename + '(' + "{}".format(category) + ')')
 plt.tight_layout()
@@ -156,7 +161,7 @@ result = {
     1: 'dog'
 }
 
-im = image.open("__image_path_TO_custom_image")
+im = Image.open("__image_path_TO_custom_image")
 im = im.resize(Image_Size)
 im = np.expand_dims(im, axis=0)
 im = np.array(im)
