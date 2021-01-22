@@ -15,7 +15,7 @@ def alarm(set_alarm_timer):
         print("the set date is :" date)
         print(now)
         if now == set_alarm_timer:
-        print("time to wake up")
+            print("time to wake up")
         #winsound.PlaySound("sound.wav", winsound.SND_ASYNC)
         filename = 'myfile.wav'
 
@@ -57,8 +57,25 @@ def actual_time():
 
 
 window = tk.Tk()
-
+window.title("Alarm clock")
 window.geometry("800x600")
+time_format = Label(window, "Enter in 24 hours format",
+                    fg="red", bg="black", font="Arial").place(x=60, y=120)
 
+setYourAlarm = Label(window, text="when to wake up ", fg="blue",
+                     relief="solid", font=("Helevetica", 7, "bold")).place(x=0, y=29)
 
+hour = StringVar()
+min = StringVar()
+sec = StringVar()
+
+hourTime = Entry(window, textvariable=hour, bg="pink",
+                 width=15).place(x=110, y=30)
+minTime = Entry(window, textvariable=min, bg="pink",
+                width=15).place(x=150, y=30)
+secTime = Entry(window, textvariable=sec, bg="pink",
+                width=15).place(x=200, y=30)
+
+submit = Button(window, text="set alarm", fg="red", width=10,
+                command=actual_time).place(x=110, y=70)
 window.mainloop()
