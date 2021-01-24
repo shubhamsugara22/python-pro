@@ -7,7 +7,7 @@ root.config(bg='SlateGray3')
 root.resizable(0, 0)
 root.title("Address book")
 
-contact_list[
+contact_list = [
     ['Shubham', '8944653345'],
     ['shakuni', '666666666'],
     ['fomo', '5698356784'],
@@ -68,3 +68,28 @@ def Select_set():
 
 
 Select_set()
+
+Label(root, text='NAME', font='arial 12 bold ',
+      bg='SlateGray3').place(x=30, y=20)
+Entry(root, textvariable=Name).place(x=100, y=20)
+
+Label(root, text='PHONE NO.', font='arial 12 bold ',
+      bg='SlateGray3').place(x=30, y=70)
+Entry(root, textvariable=Number).place(x=130, y=70)
+
+Button(root, text='ADD', font='arial 12 bold ',
+       bg='SlateGray4', command=AddContact).place(x=50, y=110)
+Button(root, text='EDIT', font='arial 12 bold ',
+       bg='SlateGray4', command=EDIT).place(x=50, y=260)
+
+Button(root, text='DELETE', font='arial 12 bold ',
+       bg='SlateGray4', command=DELETE).place(x=50, y=210)
+Button(root, text='VIEW', font='arial 12 bold ',
+       bg='SlateGray4', command=VIEW).place(x=50, y=160)
+
+Button(root, text='EXIT', font='arial 12 bold ',
+       bg='SlateGray4', command=EXIT).place(x=300, y=320)
+Button(root, text='RESET', font='arial 12 bold ',
+       bg='SlateGray4', command=RESET).place(x=50, y=310)
+
+root.mainloop()
