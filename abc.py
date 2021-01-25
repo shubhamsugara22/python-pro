@@ -12,5 +12,5 @@ def Hello():
     print("Hello world")
 
 
-button = button(window, text="show hello" command="Hello").place(x=30, y=150)
+button = Button(window, text="show hello", command="Hello").place(x=30, y=150)
 window.mainloop()
