@@ -10,7 +10,7 @@ root.geometry("500x600")
 root.title("TIC-TAC-TOE")
 digits = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-mark = '' ``
+mark = ''
 count = 0
 panels = ["panel"]*10
 
@@ -31,10 +31,10 @@ def checker(digit):
     if digit == 1 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
         button1.config(text=mark)
         count = count + 1
@@ -49,12 +49,12 @@ def checker(digit):
     if digit == 2 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button2.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -67,12 +67,12 @@ def checker(digit):
     if digit == 3 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button3.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -85,12 +85,12 @@ def checker(digit):
     if digit == 4 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button4.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -103,12 +103,12 @@ def checker(digit):
     if digit == 5 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button5.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -121,12 +121,12 @@ def checker(digit):
     if digit == 6 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button6.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -139,12 +139,12 @@ def checker(digit):
     if digit == 7 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button7.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -157,12 +157,12 @@ def checker(digit):
     if digit == 8 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button8.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -175,12 +175,12 @@ def checker(digit):
     if digit == 9 and digit in digits:
         digits.remove(digit)
         if count % 2 == 0:
-            mark = 'x'
+            mark = 'X'
             panels[digit] = mark
         elif count % 2 != 0:
-            mark = 'o'
+            mark = 'O'
             panels[digit] = mark
-        button1.config(text=mark)
+        button9.config(text=mark)
         count = count + 1
         sign = mark
         if(win(panels, sign) and sign == 'X'):
@@ -196,7 +196,7 @@ def checker(digit):
 
 
 Label(root, text="player1: X", font="times 15").grid(row=0, column=1)
-Label(root, text="player1: O", font="times 15").grid(row=0, column=2)
+Label(root, text="player2: O", font="times 15").grid(row=0, column=2)
 
 button1 = Button(root, width=15, height=7, font=(
     'Times 16 bold'), command=lambda: checker(1))
