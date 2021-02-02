@@ -22,3 +22,17 @@ class App(tk.Tk):
         tk.Tk.__init__(self)
 
         self.x = self.y = 0
+        # creating elements
+        self.canvas = tk.Canvas(
+            self, width=300, height=300, bg="white", cursor="cross")
+        self.label = tk.Label(self, text="thinking ...",
+                              font=("Helvetica", 48))
+        self.classify_btn = tk.Button(
+            self, text="recognise", command=self.classify_handwriting)
+        self.button_clear = tk.Button(
+            self, text="clear", command=self.clear_all)
+
+        self.canvas.grid(row=0, column=0, pady=2, sticky=W,)
+        self.label.grid(row=0, column=1, pady=2, padx=2)
+        self.classify_btn.grid(row=1, column=1, pady=2, padx=2)
+        self.button_clear.grid(row=1, column=0, pady=2)
