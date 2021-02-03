@@ -1,10 +1,11 @@
-from keras.models import Load_model
+from keras.models import load_model
 from tkinter import *
 import tkinter as tk
 import win32gui
 from PIL import ImageGrab, Image
+import numpy as np
 
-model = Load_model('mnist.h5')
+model = load_model('mnist.h5')
 
 
 def predict_digit(img):
@@ -25,7 +26,7 @@ class App(tk.Tk):
         # creating elements
         self.canvas = tk.Canvas(
             self, width=300, height=300, bg="white", cursor="cross")
-        self.label = tk.Label(self, text="thinking ...",
+        self.label = tk.Label(self, text="Draw",
                               font=("Helvetica", 48))
         self.classify_btn = tk.Button(
             self, text="recognise", command=self.classify_handwriting)
@@ -37,12 +38,16 @@ class App(tk.Tk):
         self.classify_btn.grid(row=1, column=1, pady=2, padx=2)
         self.button_clear.grid(row=1, column=0, pady=2)
 
+        self.canvas.bind("<B1-Motion>", self.draw_lines)
+
     def clear_all(self):
         self.canvas.delete("all")
 
     def classify_handwriting(self):
         HWND = self.canvas.winfo_id()
         rect = win32gui.GetWindowRect(HWND)
+        a, b, c, d = rect
+        rect = (a+4, b+4, c-4, d-4)
         im = ImageGrab.grab(rect)
 
         digit, acc = predict_digit(im)
