@@ -50,6 +50,11 @@ def madlib3():
           '.When our bag were full, we went on a free hay ride to '+place + ' and back. It ended at a hay pile where we got to ' + verb + ' ' + adverb + '. I can hardly wait to get home and cook with the apples. We are going to make appple '+food + ' and '+things+' pies!.')
 
 
-Button()
-Button()
-Button()
+Button(root, text='The photgrapher', font='arial 15',
+       command=madlib1, bg='ghost white').place(x=60, y=120)
+Button(root, text='apple and apple', font='arial 15',
+       command=madlib3, bg='ghost white').place(x=70, y=180)
+Button(root, text='The butterfly', font='arial 15',
+       command=madlib2, bg='ghost white').place(x=80, y=240)
+
+root.mainloop()
