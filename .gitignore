@@ -4,3 +4,6 @@ test1/
 train/
 myfile.wav
 alarm/myfile.wav
+.vscode
+avocado_analytics/venv
+avocado_analytics/avocado.csv
