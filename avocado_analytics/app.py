@@ -11,14 +11,14 @@ data['Date'] = pd.to_datetime(data['Date'], format="%Y-%m-%d")
 data.sort_values("Date", inplace=True)
 
 app = dash.Dash(__name__)
-external_stylesheet = [
+external_stylesheets = [
     {
         "href": "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap",
         "rel": "stylesheet",
     }
 ]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-app.title = "Avoacado analytics understand your avocados!"
+app.title = "Avocado analytics understand your avocados!"
 
 app.layout = html.Div(
     children=[
@@ -82,7 +82,7 @@ app.layout = html.Div(
                             "layout":
                             {
                                 "title": {
-                                    "text": "Avocado sold"
+                                    "text": "Avocado sold",
                                     "x": 0.05,
                                     "xanchor": "left",
                                 },
