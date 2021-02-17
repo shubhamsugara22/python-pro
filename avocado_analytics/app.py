@@ -11,37 +11,92 @@ data['Date'] = pd.to_datetime(data['Date'], format="%Y-%m-%d")
 data.sort_values("Date", inplace=True)
 
 app = dash.Dash(__name__)
+external_stylesheet = [
+    {
+        "href": "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap",
+        "rel": "stylesheet",
+    }
+]
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app.title = "Avoacado analytics understand your avocados!"
 
 app.layout = html.Div(
     children=[
-        html.H1(children="avocado analytics"),
-        html.P(
-            children="Analyze the behavior of avocado prices  and number of avocados sold in the US between 2015  and 2018"
+        html.Div(
+            children=[
+                html.P(children="🥑", className="header-emoji"),
+                html.H1(children="avocado analytics",
+                        className="header-title"),
+                html.P(
+                    children="Analyze the behavior of avocado prices  and number of avocados sold in the US between 2015  and 2018",
+                    className="header-description",
+                ),
+            ],
+            className="header",
         ),
-        dcc.Graph(
-            figure={
-                "data": [
-                    {
-                        "x": data["Date"],
-                        "y":data["AveragePrice"],
-                        "type":"lines",
-                    },
-                ],
-                "layout":{"title": "Average price of avocados"}
-            },
-        ),
-        dcc.Graph(
-            figure={
-                "data": [
-                    {
-                        "x": data["Date"],
-                        "y":data["Total Volume"],
-                        "type":"lines",
-                    },
-                ],
-                "layout":{"title": "Avocado sold"}
-            },
-        ),
+        html.Div(
+            children=[
+                html.Div(
+                    children=dcc.Graph(
+                        id="price-chart",
+                        config={"displayModeBar": False},
+                        figure={
+                            "data": [
+                                {
+                                    "x": data["Date"],
+                                    "y":data["AveragePrice"],
+                                    "type":"lines",
+                                    "hovertemplate":"$%{y:.2f}"
+                                                    "<extra></extra>",
+                                },
+                            ],
+                            "layout":{
+                                "title": {
+                                    "text": "Average price of avocados",
+                                    "x": 0.05,
+                                    "xanchor": "left",
+                                },
+                                "xaxis": {"fixedrange": True},
+                                "yaxis": {
+                                    "tickprefix": "$",
+                                    "fixedrange": True,
+                                },
+                                "colorway": ["#17B897"],
+                            },
+                        },
+                    ),
+                    className="card",
+                ),
+                html.Div(
+                    children=dcc.Graph(
+                        id="volume-chart",
+                        config={"displayModeBar": False},
+                        figure={
+                            "data": [
+                                {
+                                    "x": data["Date"],
+                                    "y":data["Total Volume"],
+                                    "type":"lines",
+                                },
+                            ],
+                            "layout":
+                            {
+                                "title": {
+                                    "text": "Avocado sold"
+                                    "x": 0.05,
+                                    "xanchor": "left",
+                                },
+                                "xaxis": {"fixedrange": True},
+                                "yaxis": {"fixedrange": True},
+                                "colorway": ["#E12D39"],
+                            },
+                        },
+                    ),
+                    className="card",
+                ),
+            ],
+            className="wrapper"
+        )
     ]
 )
 
