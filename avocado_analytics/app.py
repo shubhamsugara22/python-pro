@@ -8,7 +8,7 @@ from dash.dependencies import Output, Input
 
 # intial data queried for dashboard
 data = pd.read_csv("avocado.csv")
-data = data.query("type == 'conventional' and region == 'Albany'")
+#data = data.query("type == 'conventional' and region == 'Albany'")
 data['Date'] = pd.to_datetime(data['Date'], format="%Y-%m-%d")
 data.sort_values("Date", inplace=True)
 
@@ -50,9 +50,9 @@ app.layout = html.Div(
                             value="Albany",
                             clearable=False,
                             className="dropdown",
-                        )
+                        ),
                     ]
-                )
+                ),
                 html.Div(
                     children=[
                         html.Div(children="Type", className="menu-title"),
@@ -60,21 +60,21 @@ app.layout = html.Div(
                             id="type-filter",
                             options=[
                                 {"label": avocado_type, "value": avocado_type}
-                                for avocado_type in np.sort(data.region.unique())
+                                for avocado_type in data.type.unique()
                             ],
                             value="organic",
                             clearable=False,
                             searchable=False,
                             className="dropdown",
                         ),
-                    ],
+                    ]
                 ),
                 html.Div(
                     children=[
                         html.Div(children="Date Range",
                                  className="menu-title"),
                         dcc.DatePickerRange(
-                            id="data-range",
+                            id="date-range",
                             min_date_allowed=data.Date.min().date(),
                             max_date_allowed=data.Date.max().date(),
                             start_date=data.Date.min().date(),
@@ -112,7 +112,7 @@ app.layout = html.Div(
     [Output("price-chart", "figure"), Output("volume-chart", "figure")],
     [
         Input("region-filter", "value"),
-        Input("type-filter", "Value"),
+        Input("type-filter", "value"),
         Input("date-range", "start_date"),
         Input("date-range", "end_date"),
     ]
@@ -128,8 +128,8 @@ def update_charts(region, avocado_type, start_date, end_date):
     price_chart_figure = {
         "data": [
             {
-                "x": data["Date"],
-                "y":data["AveragePrice"],
+                "x": filtered_data["Date"],
+                "y": filtered_data["AveragePrice"],
                 "type":"lines",
                 "hovertemplate":"$%{y:.2f}"
                 "<extra></extra>",
@@ -152,8 +152,8 @@ def update_charts(region, avocado_type, start_date, end_date):
     volume_chart_figure = {
         "data": [
             {
-                "x": data["Date"],
-                "y":data["Total Volume"],
+                "x": filtered_data["Date"],
+                "y": filtered_data["Total Volume"],
                 "type":"lines",
             },
         ],
@@ -167,7 +167,7 @@ def update_charts(region, avocado_type, start_date, end_date):
             "yaxis": {"fixedrange": True},
             "colorway": ["#E12D39"],
         },
-    },
+    }
     return price_chart_figure, volume_chart_figure
 
 
