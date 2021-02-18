@@ -2,6 +2,8 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
+import numpy as np
+from dash.dependencies import Output, Input
 
 
 # intial data queried for dashboard
@@ -34,6 +36,24 @@ app.layout = html.Div(
             ],
             className="header",
         ),
+        html.Div(
+            children=[
+                html.Div(
+                    children=[
+                        html.Div(children="Region", className="menu-title"),
+                dcc.Dropdown(
+                    id="region-filter",
+                    options=[
+                        {"label": region, "value": region}
+                        for region in np.sort(data.region.unique())
+                    ],
+                    value="Albany",
+                    clearable=False,
+                    className="dropdown",
+                )
+            ]
+        )
+
         html.Div(
             children=[
                 html.Div(
