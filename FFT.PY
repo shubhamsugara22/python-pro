@@ -14,5 +14,15 @@ def generate_sine_wave(freq, sample_rate, duration):
 
 
 x, y = generate_sine_wave(2, SAMPLE_RATE, DURATION)
-plt.plot(x, y)
+# plt.plot(x, y)
+# plt.show()
+
+_, nice_tone = generate_sine_wave(400, SAMPLE_RATE, DURATION)
+_, noise_tone = generate_sine_wave(4000, SAMPLE_RATE, DURATION)
+
+noise_tone = noise_tone*0.3
+
+mixed_tone = nice_tone + noise_tone
+normalized_tone = np.int16((mixed_tone/mixed_tone.max())*32767)
+plt.plot(normalized_tone[:1000])
 plt.show()
