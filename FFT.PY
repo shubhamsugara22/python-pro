@@ -1,5 +1,7 @@
+from scipy.fft import fft, fftfreq
 import numpy as np
 from matplotlib import pyplot as plt
+from scipy.io.wavfile import write
 
 SAMPLE_RATE = 44100
 DURATION = 5
@@ -25,4 +27,13 @@ noise_tone = noise_tone*0.3
 mixed_tone = nice_tone + noise_tone
 normalized_tone = np.int16((mixed_tone/mixed_tone.max())*32767)
 plt.plot(normalized_tone[:1000])
+plt.show()
+write("mysinewave.wav", SAMPLE_RATE, normalized_tone)
+
+
+N = SAMPLE_RATE * DURATION
+yf = fft(normalized_tone)
+xf = fftfreq(N, 1/SAMPLE_RATE)
+
+plt.plot(xf, np.abs(yf))
 plt.show()
