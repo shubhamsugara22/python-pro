@@ -37,3 +37,12 @@ xf = fftfreq(N, 1/SAMPLE_RATE)
 
 plt.plot(xf, np.abs(yf))
 plt.show()
+
+points_per_freq = len(xf) / (SAMPLE_RATE/2)
+
+target_idx = int(points_per_freq * 4000)
+
+yf[target_idx - 1:target_idx+2] = 0
+
+plt.plot(xf, np.abs(yf))
+plt.show()
