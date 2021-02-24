@@ -28,7 +28,7 @@ mixed_tone = nice_tone + noise_tone
 normalized_tone = np.int16((mixed_tone/mixed_tone.max())*32767)
 plt.plot(normalized_tone[:1000])
 plt.show()
-write("mysinewave.wav", SAMPLE_RATE, normalized_tone)
+#write("mysinewave.wav", SAMPLE_RATE, normalized_tone)
 
 
 N = SAMPLE_RATE * DURATION
