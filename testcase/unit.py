@@ -5,8 +5,7 @@ from prime import is_prime
 
 class Tests(unittest.TestCase):
     def test_1(self):
-        self.assertFalse(is_pri
-                         me(1))
+        self.assertFalse(is_prime(1))
 
     def test_2(self):
         self.assertFalse(is_prime(8))
