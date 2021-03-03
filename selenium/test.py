@@ -14,10 +14,32 @@ driver = webdriver.Chrome(
     executable_path='C:/Users/hp/Downloads/chromedriver_win32/chromedriver.exe')
 
 
-# class WebPageTest(unittest.TestCase):
+class WebPageTest(unittest.TestCase):
 
-#     def test_title:
+    def test_title(self):
+        driver.get(file_uri("counter.html"))
 
-#     def test_increase:
+        self.assertEqual(driver.title, "Counter")
 
-#     def test_decrease:
+    def test_increase(self):
+        driver.get(file_uri("counter.html"))
+        increase = driver.find_element_by_id("increase")
+        increase.click()
+        self.assertEqual(driver.find_element_by_tag_name("h1").text, "1")
+
+    def test_decrease(self):
+        driver.get(file_uri("counter.html"))
+        decrease = driver.find_element_by_id("decrease")
+        decrease.click()
+        self.assertEqual(driver.find_element_by_tag_name("h1").text, "-1")
+
+    def test_multiple_increase(self):
+        driver.get(file_uri("counter.html"))
+        increase = driver.find_element_by_id("increase")
+        for i in range(3):
+            increase.click()
+        self.assertEqual(driver.find_element_by_tag_name("h1").text, "3")
+
+
+if __name__ == "__main__":
+    unittest.main()
