@@ -33,3 +33,10 @@ class Game:
 
         self.screen = pygame.display.set_mode((self.w, self.h))
         pygame.display.set_caption("Type Speed Test")
+
+    def draw_text(self, screen, msg, yfsize, color):
+        font = pygame.font.Font(None, fsize)
+        text = font.render(msg, 1, color)
+        text_rect = text.get_rect(center=(self.w/2, y))
+        screen.blit(text, text_rect)
+        pygame.display.update()
