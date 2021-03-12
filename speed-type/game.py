@@ -40,3 +40,9 @@ class Game:
         text_rect = text.get_rect(center=(self.w/2, y))
         screen.blit(text, text_rect)
         pygame.display.update()
+
+    def get_sentence(self):
+        f = open("sentence.txt").read()
+        sentences = f.split('\n')
+        sentence = random.choice(sentences)
+        return sentence
