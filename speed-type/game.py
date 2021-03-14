@@ -74,3 +74,37 @@ class Game:
 
             print(self.results)
             pygame.display.update()
+    
+    
+    def reset_game(self):
+        self.screen.blit(self.open_img,(0,0))
+
+        pygame.display.update()
+        time.sleep(1)
+        
+        self.reset= False
+        self.end= False
+
+        self.input_text = ''
+        self.word=''
+        self.time_start = 0
+        self.total_time= 0
+        self.wpm = 0
+
+        self.word =self.get_sentence()
+        if(not self.word):self.reset_game()
+
+        self.screen.fill((0,0,0))
+        self.screen.blit(self.bg,(0,0))
+
+        msg= "typing speed test"
+        self.draw_test(self.screen, msg,80,80,self.HEAD_C)
+        pygame.draw.rect(self.screen,(255,192,25),(50,250,650,50),2)
+
+        self.draw_text(self.screen,self.word,200,28,self.TEXT_C)
+
+        pygame.display.update()
+
+
+    def run(self):
+        self.reset_game()
