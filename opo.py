@@ -1,9 +1,9 @@
 from tkinter import *
-from pytube import Youtube
+from pytube import YouTube
 
 
 root = Tk()
-root.geometry("500X400")
+root.geometry("500x300")
 root.resizable(0, 0)
 root.title("video downloader")
 
