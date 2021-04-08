@@ -7,8 +7,8 @@ HEIGHT = 600
 black = (0, 0, 0)
 
 gameDisplay = pygame.display.set_mode(WIDTH, HEIGHT)
-
-background = pygame.image.loadI("")
+pygame.display.set_caption('Keyboard Jump Game')
+background = pygame.image.load("keyback.jpg")
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 
 font = pygame.font.Font("comic.ttf", 40)
@@ -65,38 +65,37 @@ while True:
         game_start = False
     game_over = False
 
+    background = pygame.image.load('teacher-background.jpg')
+    background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+    character = pygame.image.load('char.jpg')
+    character = pygame.transform.scale(character, (50, 50))
+    wood = pygame.image.load('wood-.png')
+    wood = pygame.transform.sclae(wood, (90, 50))
+    gameDisplay.blit(background, (0, 0))
+    gameDisplay.blit(wood, (x_cor-50, y_cor+15))
+    gameDisplay.blit(character, (x_cor-100, y_cor))
+    draw_text(gameDisplay, str(displayword), 40, x_cor, y_cor)
+    draw_text(gameDisplay, 'Score:'+str(score), 40, WIDTH/2, 5)
 
-background = pygame.image.load('')
-background = pygame.transform.scale(background, (WIDTH, HEIGHT))
-character = pygame.image.load('')
-character = pygame.transform.scale(character, (50, 50))
-wood = pygame.image.load('')
-wood = pygame.transform.sclae(wood, (90, 50))
-gameDisplay.blit(background, (0, 0))
-gameDisplay.blit(wood, (x_cor-50, y_cor+15))
-gameDisplay.blit(character, (x_cor-100, y_cor))
-draw_text(gameDisplay, str(displayword), 40, x_cor, y_cor)
-draw_text(gameDisplay, 'Score:'+str(score), 40, WIDTH/2, 5)
+    y_cor += word_speed
 
-y_cor += word_speed
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+        elif event.type == pygame.KEYDOWN:
+            yourword += pygame.key.name(event.key)
 
-for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-        pygame.quit()
-        quit()
-    elif event.type == pygame.KEYDOWN:
-        yourword += pygame.key.name(event.key)
-
-        if displayword.startswith(yourword):
-            if displayword == yourword:
-                score += len(displayword)
-                new_word()
+            if displayword.startswith(yourword):
+                if displayword == yourword:
+                    score += len(displayword)
+                    new_word()
             else:
                 game_front_screen()
                 time.sleep(2)
                 pygame.quit()
 
-if y_cor < HEIGHT - 5:
-    pygame.display.update()
-else:
-    game_front_screen()
+    if y_cor < HEIGHT - 5:
+        pygame.display.update()
+    else:
+        game_front_screen()
