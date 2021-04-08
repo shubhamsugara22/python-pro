@@ -54,3 +54,17 @@ def game_front_screen():
                 pygame.quit()
             if event.type == pygame.KEYUP:
                 waiting = False
+
+
+game_over = True
+game_start = True
+while True:
+    if game_over:
+        if game_start:
+            game_front_screen()
+        game_start = False
+    game_over = False
+
+
+background =
+background =
