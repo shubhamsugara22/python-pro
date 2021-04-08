@@ -28,3 +28,29 @@ def new_word():
 
 
 new_word()
+font_name = pygame.font.match_font('comic.ttf')
+
+
+def draw_text(display, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, true, black)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    gameDisplay.blit(text_surface, text_rect)
+
+
+def game_front_screen():
+    gameDisplay.blit(background, (0, 0))
+    if not game_over:
+        draw_text(gameDisplay, "GAME OVER", 90, WIDTH/2, HEIGHT/4)
+        draw_text(gameDisplay, "Score:" + str(score), 70, WIDTH/2, HEIGHT/2)
+    else:
+        draw_text(gameDisplay, "Press any key to begin", 54, WIDTH/2, 500)
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYUP:
+                waiting = False
