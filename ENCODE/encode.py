@@ -36,3 +36,12 @@ def Decode(key, message):
         dec.append(chr(256+ord(message[i])-ord(key_c)) % 256)
 
     return " ".join(dec)
+
+
+def mod():
+    if (mode.get() == 'e'):
+        Result.set(Encode(private_key.get(), Text.get()))
+    elif (mode.get() == 'd'):
+        Result.set(Decode(private_key.get(), Text.get()))
+    else:
+        Result.set("Invalid mode")
