@@ -38,10 +38,21 @@ def Decode(key, message):
     return " ".join(dec)
 
 
-def mod():
+def mode():
     if (mode.get() == 'e'):
         Result.set(Encode(private_key.get(), Text.get()))
     elif (mode.get() == 'd'):
         Result.set(Decode(private_key.get(), Text.get()))
     else:
         Result.set("Invalid mode")
+
+
+def Exit():
+    root.destroy()
+
+
+def Reset():
+    Text.set("")
+    private_key.set("")
+    mode.set("")
+    Result.set("")
