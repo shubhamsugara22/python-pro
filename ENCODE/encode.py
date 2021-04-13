@@ -58,18 +58,19 @@ def Reset():
     Result.set("")
 
 
-Label()
-Entry()
+Label(root, font='arial 12 bold', text='MESSAGE').place(x=60, y=60)
+Entry(root, font='arial 10', textvariable=Text,
+      bg='ghost white').place(x=290, y=60)
 
-Label()
-Entry()
+Label(root, font='arial 12 bold')
+Entry(root, font='arial 10')
 
-Label()
-Entry()
-Entry()
+Label(root, font='arial 12 bold')
+Entry(root, font='arial 10')
+Entry(root, font='arial 10 bold')
 
-Button()
-Button()
-Button()
+Button(root, font='arial 10 bold')
+Button(root, font='arial 10 bold')
+Button(root, font='arial 10 bold')
 
 root.mainloop()
