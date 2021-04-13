@@ -38,7 +38,7 @@ def Decode(key, message):
     return " ".join(dec)
 
 
-def mode():
+def Mode():
     if (mode.get() == 'e'):
         Result.set(Encode(private_key.get(), Text.get()))
     elif (mode.get() == 'd'):
@@ -68,7 +68,7 @@ Entry(root, font='arial 10', textvariable=private_key,
 
 Label(root, font='arial 12 bold',
       text='MODE(e-encode , d-decode)').place(x=60, y=120)
-Entry(root, font='arial 10', textvariable=mode,
+Entry(root, font='arial 10', textvariable=Mode,
       bg='ghost white').place(x=290, y=120)
 Entry(root, font='arial 10 bold', textvariable=Result,
       bg='ghost white').place(x=290, y=150)
